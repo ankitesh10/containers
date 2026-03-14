@@ -1,0 +1,40 @@
+// Running images
+docker ps
+
+// download ubuntu image
+docker run -it --name docker-host --rm --privileged ubuntu:noble
+
+it -> make it interactive
+rm -> when stop throw everything away like logs
+privileged -> normally don't do it, give root privilege
+resolute -> name of current ubuntu version
+
+
+// know version of ubuntu
+cat /etc/issue
+
+// make new folder
+mkdir my-new-root
+
+// create new file
+echo "my super secret thing" >> my-new-root/secret.txt
+
+// now change root
+chroot /my-new-root bash
+
+// now get bash to new root
+// get bash dependency
+ldd /bin/bash
+
+
+// now copy all dependency to new root and then copy bash
+
+// make dir new lib directory
+mkdir my-new-root/lib{,64} // this will create lib and lib64 directory first is empty string and second 64
+
+example -  cp /lib/ld-linux-aarch64.so.1 /my-new-root/lib/
+
+bash - /bin/bash
+ls - /bin/ls
+cat - /bin/cat
+
