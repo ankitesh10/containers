@@ -7,7 +7,7 @@ docker run -it --name docker-host --rm --privileged ubuntu:noble
 it -> make it interactive
 rm -> when stop throw everything away like logs
 privileged -> normally don't do it, give root privilege
-resolute -> name of current ubuntu version
+noble -> name of current ubuntu version
 
 
 // know version of ubuntu
