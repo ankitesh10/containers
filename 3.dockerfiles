@@ -1,0 +1,20 @@
+Create Dockerfile
+
+// Sample code 
+
+FROM node:20
+
+CMD ["node", "-e", "console.log(\"hi lol\")"]
+
+// CMD - run this file while execution during run not during building
+
+// run command to build container
+docker build .
+
+// run
+docker run <hash_id>
+// bdb6f833942381b166027b3c14d099030e5152c71a0d10883ee4906821789807
+
+// tag
+docker build . -t my-node-app
+docker run my-node-app

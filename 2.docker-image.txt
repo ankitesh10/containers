@@ -1,0 +1,54 @@
+docker run --rm -it bcbcarl/hollywood
+
+docker run -dit --name hw --rm bcbcarl/hollywood hw
+
+dit -> run in background
+
+//pause
+docker pause hw
+
+//unpuase
+docker unpause hw
+
+//kill
+docker kill hw
+
+//execute check process
+docker exec hw ps aux
+
+exec - execute this container hw
+ps aux - run this command on this container
+
+// attach - attach me to the process (usually you want to use exec not attach)
+docker attach hw
+
+
+// image history
+docker history node 
+
+node -> name of image
+
+// docker info
+docker info
+
+
+// process inside container
+docker top hw
+
+// remove container
+docker rm <container_name>
+
+
+// show images
+docker images
+
+// delete image
+docker rmi <image_name>
+
+
+// docker images search
+docker search js
+
+// help
+
+docker --help
