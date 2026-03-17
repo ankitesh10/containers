@@ -85,3 +85,37 @@ WORKDIR /home/node/code
 COPY index.js index.js
 
 CMD ["node", "index.js"]
+
+
+// complicated js app
+
+FROM node:20
+
+USER node
+
+WORKDIR /home/node/code
+
+COPY --chown=node:node . .
+
+RUN npm ci
+
+CMD ["node", "index.js"]
+
+// layers
+
+FROM node:20
+
+USER node
+
+WORKDIR /home/node/code
+
+COPY --chown=node:node package*.json ./
+
+RUN npm ci
+
+COPY --chown=node:node . .
+
+CMD ["node", "index.js"]
+
+
+// what above will do is it will install package only when package.json and package-lock.json is changed otherwise it will take it from cache.
