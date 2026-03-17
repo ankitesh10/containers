@@ -1,5 +1,7 @@
 docker run --rm -it bcbcarl/hollywood
 
+// --rm will tell docker to remove container when it exists
+
 docker run -dit --name hw --rm bcbcarl/hollywood hw
 
 dit -> run in background

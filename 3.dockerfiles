@@ -15,6 +15,18 @@ docker build .
 docker run <hash_id>
 // bdb6f833942381b166027b3c14d099030e5152c71a0d10883ee4906821789807
 
-// tag
+// tag -> -t
 docker build . -t my-node-app
 docker run my-node-app
+docker run --init my-node-app // this will allow to exit via ctrl+c but it will not do it gracefully and allow process to complete
+
+// can do versioning like this
+docker build . -t my-node-app:2
+
+
+// expose port, first one is host machine and second is container
+docker run --init --publish 3000:3000 --rm --name na my-node-app
+
+// there is instruction to add in docker called EXPOSE 3000, which will be suggestion to expose. 
+// There is other flag for respecting those exposes which will random assign expose port which is not convinient.
+// So pushlish is generally expected standard

@@ -1,3 +1,5 @@
 FROM node:20
 
-CMD ["node", "-e", "console.log(\"hi lol\")"]
+COPY index.js index.js
+
+CMD ["node", "index.js"]
