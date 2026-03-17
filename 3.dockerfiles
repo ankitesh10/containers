@@ -18,7 +18,7 @@ docker run <hash_id>
 // tag -> -t
 docker build . -t my-node-app
 docker run my-node-app
-docker run --init my-node-app // this will allow to exit via ctrl+c but it will not do it gracefully and allow process to complete
+docker run --init my-node-app // init will allow to exit via ctrl+c but it will not do it gracefully and allow process to complete
 
 // can do versioning like this
 docker build . -t my-node-app:2
@@ -30,3 +30,46 @@ docker run --init --publish 3000:3000 --rm --name na my-node-app
 // there is instruction to add in docker called EXPOSE 3000, which will be suggestion to expose. 
 // There is other flag for respecting those exposes which will random assign expose port which is not convinient.
 // So pushlish is generally expected standard
+
+
+// creating a server
+FROM node:20
+
+COPY index.js index.js
+
+CMD ["node", "index.js"]
+
+
+// define proper owner and path
+
+FROM node:20
+
+COPY index.js /home/node/code/index.js
+
+CMD ["node", "/home/node/code/index.js"]
+
+
+
+
+
+// you can define user node in instruction, by default it will be root
+// node is by default user created by node for docker image
+// can create new user - RUN useradd -ms /bin/bash lolcat
+
+FROM node:20
+
+USER node
+
+COPY index.js /home/node/code/index.js
+
+CMD ["node", "/home/node/code/index.js"]
+
+
+// enter docker bash
+docker exec -it na bash
+
+// while copy add --chown command, this is redundant if user node is added
+COPY --chown=node index.js /home/node/code/index.js
+
+
+// instead of COPY you can also use ADD, which has much more permi
