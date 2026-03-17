@@ -2,6 +2,10 @@ FROM node:20
 
 USER node
 
-COPY index.js /home/node/code/index.js
+WORKDIR /home/node/code
 
-CMD ["node", "/home/node/code/index.js"]
+COPY --chown=node:node . .
+
+RUN npm ci
+
+CMD ["node", "index.js"]
