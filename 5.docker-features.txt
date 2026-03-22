@@ -1,2 +1,14 @@
 // Docker scout - scans for security vulneribilities
-docker scout quickview apline:3.23.3
+docker scout quickview alpine:3.23.3
+
+
+// volumes
+it is state that you want to survive between runs, can be shared to all your docker containers
+
+
+//in docker-volume directory
+docker build -t incrementor .
+docker run --rm incrementor
+
+// command to run docker run with volume for presistant state
+docker run --rm --env DATA_PATH=/data/num.txt --mount type=volume,src=incrementor-data,target=/data incrementor
