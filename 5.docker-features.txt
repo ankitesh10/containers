@@ -1,6 +1,9 @@
 // Docker scout - scans for security vulneribilities
 docker scout quickview alpine:3.23.3
 
+// bind mount - use local files to use in containers
+docker run --mount type=bind,source="$(pwd)"/dist,target=/usr/share/nginx/html -p 8080:80 nginx:latest
+
 
 // volumes
 it is state that you want to survive between runs, can be shared to all your docker containers
