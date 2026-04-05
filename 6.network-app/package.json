@@ -1,0 +1,16 @@
+{
+  "name": "6.network-app",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "fastify": "^5.8.4",
+    "mongodb": "^7.1.1"
+  }
+}
