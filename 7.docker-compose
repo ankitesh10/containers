@@ -1,0 +1,65 @@
+// repo for code and sample docker compose file - https://github.com/btholt/complete-intro-to-containers-v2
+
+- With Docker Compose we simplify this a lot. Docker Compose allows us the ability to coordinate multiple 
+  containers and do so with one YAML file. 
+
+
+- Do note that Docker does say that Docker Compose is suitable for production environments 
+  if you have a single instance running multiple containers.
+
+
+- In addition to working very well dev, Docker Compose is very useful in CI/CD scenarios when you want 
+  GitHub Actions or some CI/CD provider to spin up multiple environments to quickly run some tests.
+
+- Create a new file in the root directory of your project called docker-compose.yml and put this in there:
+
+services:
+  api:
+    build: api
+    ports:
+      - "8080:8080"
+    links:
+      - db
+    environment:
+      MONGO_CONNECTION_STRING: mongodb://db:27017
+  db:
+    image: mongo:7
+  web:
+    build: web
+    ports:
+      - "8081:80"
+
+// https://docs.docker.com/reference/compose-file/#compose-file-structure-and-examples
+
+
+- run this command - docker compose up
+
+- If you change something and want to make sure it builds, make sure to run docker compose up --build. 
+  Docker Compose isn't watching for changes when you run up.
+
+
+// nodemon
+
+FROM node:latest
+
+RUN npm i -g nodemon
+
+USER node
+
+RUN mkdir /home/node/code
+
+WORKDIR /home/node/code
+
+COPY --chown=node:node package-lock.json package.json ./
+
+RUN npm ci
+
+COPY --chown=node:node . .
+
+CMD ["nodemon", "index.js"]
+
+- Now we can write our code and every time it save it'll restart the server from within the container. 
+  This will make this super productive to work with!
+
+- While we're about to get to Kubernetes which will handle bigger deployment scenarios than Docker Compose can, 
+  you can use docker-compose up --scale web=10 to scale up your web container to 10 concurrently running containers. 
